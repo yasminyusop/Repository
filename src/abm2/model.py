@@ -30,9 +30,54 @@ agents = []
 agents.append([random.randint(0,99),random.randint(0,99)])
 print(agents)
 
-# Plot the agents
-#plt.scatter(agents[0][0], agents[0][1], color='black')
-#plt.scatter(agents[1][0], agents[1][1], color='black')
-#plt.show()
+# Change x0 and y0 randomly
+rn = random.random()
+print("rn", rn)
+if rn < 0.5:
+    agents[0][0] = agents[0][0] + 1
+else:
+    agents[0][0] = agents[0][0] - 1
+print(agents)
+
+rn = random.random()
+print("rn", rn)
+if rn < 0.5:
+    agents[0][1] = agents[0][1] + 1
+else:
+    agents[0][1] = agents[0][1] - 1
+print(agents)
+
+
+#append list to add (x1,y1)
+agents.append([random.randint(0,99),random.randint(0,99)])
+print(agents)
+
+# Change x1 and y1 randomly
+rn = random.random()
+print("rn", rn)
+if rn < 0.5:
+    agents[1][0] = agents[1][0] + 1
+else:
+    agents[1][0] = agents[1][0] - 1
+print(agents)
+
+rn = random.random()
+print("rn", rn)
+if rn < 0.5:
+    agents[1][1] = agents[1][1] + 1
+else:
+    agents[1][1] = agents[1][1] - 1
+print(agents)
+
 # Get the coordinates with the largest x-coordinate
-#print(max(agents, key=operator.itemgetter(0)))
+lx = max(agents, key=operator.itemgetter(0))
+print(lx)
+
+# Plot the agents
+plt.scatter(agents[0][0], agents[0][1], color='black')
+plt.scatter(agents[1][0], agents[1][1], color='black')
+plt.scatter(lx[0], lx[1], color='red')
+plt.show()
+
+
+
