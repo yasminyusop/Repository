@@ -15,7 +15,7 @@ import operator
 random.seed(0)
 
 # A variable to store the number of agents
-n_agents = 10
+n_agents = 3
 
 # Initialise agents
 agents = []
@@ -63,30 +63,33 @@ plt.show()
 """
 start of abm3
 """
-
+# Use get_distance
 # Calculate the Euclidean distance between (x0, y0) and (x1, y1)
 # Set x0 and y0 to equal 0, x1 to equal 3, and y1 to equal 4
 
-def add(x0, y0, x1, y1):
-    return x1-x0, y1-y0
-print(add(x0=0, y0=0, x1=3, y1=4))
+def get_distance(x0,y0,x1,y1):
+    return math.sqrt((x0 - x1)**2 + (y0 - y1)**2)
+print("distance", get_distance(0,0,3,4))
 
-def add(x0=0, y0=0, x1=3, y1=4):
-    dx=get_distance(x0, x1)
-    dy=get_distance(y0, y1)
-print(dx,dy)
+''' get_distance function was defined with x0,y0,y1,y1
+and distance equation was simplified into one line '''
 
-"""
-# Calculate the difference in the x coordinates.
-dx = x0 - x1
-# Calculate the difference in the y coordinates.
-dy = y0 - y1
-# Square the differences and add the squares
-ssd = (dx * dx) + (dy * dy)
-print("ssd", ssd)
-# Calculate the square root
-distance = ssd ** 0.5
-print("distance", distance)
-distance = math.sqrt(ssd)
-print("distance", distance)
-"""
+max_distance = 0
+for a in agents:
+    for b in agents:
+        distance = get_distance(a[0], a[1], b[0], b[1])
+        print("distance between", a, b, distance)
+        max_distance = max(max_distance, distance)
+        print("max_distance", max_distance)
+        
+min_distance = distance = get_distance(agents[0][0], agents[0][1], agents[1][0], agents[1][1])
+for i in range(len(agents)):
+    a = agents[i]
+    for j in range(i + 1, len(agents)):
+            #if (j > i):
+            print(i, j)
+            b = agents[j]
+            distance = get_distance(a[0], a[1], b[0], b[1])
+            #print("distance between", a, b, distance)
+            max_distance = min(max_distance, distance)
+print("min_distance", max_distance)        
