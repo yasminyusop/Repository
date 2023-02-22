@@ -10,12 +10,13 @@ import math
 import matplotlib
 from matplotlib import pyplot as plt
 import operator
+import time
 
 # Set the pseudo-random seed for reproducibility
 random.seed(0)
 
 # A variable to store the number of agents
-n_agents = 3
+n_agents = 10
 
 # Initialise agents
 agents = []
@@ -74,22 +75,19 @@ print("distance", get_distance(0,0,3,4))
 ''' get_distance function was defined with x0,y0,y1,y1
 and distance equation was simplified into one line '''
 
-max_distance = 0
-for a in agents:
-    for b in agents:
-        distance = get_distance(a[0], a[1], b[0], b[1])
-        print("distance between", a, b, distance)
-        max_distance = max(max_distance, distance)
-        print("max_distance", max_distance)
-        
-min_distance = distance = get_distance(agents[0][0], agents[0][1], agents[1][0], agents[1][1])
-for i in range(len(agents)):
-    a = agents[i]
-    for j in range(i + 1, len(agents)):
-            #if (j > i):
-            print(i, j)
+start = time.perf_counter()
+
+def get_max_distance(agents):
+    max_distance = 0
+    for i in range(len(agents)):
+        a = agents[i]
+        for j in range(i+1, len(agents)):
             b = agents[j]
             distance = get_distance(a[0], a[1], b[0], b[1])
-            #print("distance between", a, b, distance)
-            max_distance = min(max_distance, distance)
-print("min_distance", max_distance)        
+            max_distance = max(max_distance, distance)
+    return max_distance
+
+print("max_distance", get_max_distance(agents))
+
+end = time.perf_counter()
+print("Time taken to calculate maximum distance", end - start, "seconds")    
