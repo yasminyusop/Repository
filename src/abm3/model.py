@@ -16,32 +16,54 @@ import time
 random.seed(0)
 
 # A variable to store the number of agents
-n_agents = 10
+n_agents = 1000
+n_iterations = 1000
+
+# Variables for constraining movement.
+# The minimum x coordinate.
+x_min = 0
+# The minimum y coordinate.
+y_min = 0
+# The maximum x coordinate.
+x_max = 99
+# The maximum y coordinate.
+y_max = 99
 
 # Initialise agents
 agents = []
 for i in range(n_agents):
     agents.append([random.randint(0, 99), random.randint(0, 99)])
-print(agents)
+#print(agents)
 
 # Move agents
-for i in range(n_agents):
-    # Change agents[i] coordinates randomly
-    # x-coordinate
-    rn = random.random()
-    #print("rn", rn)
-    if rn < 0.5:
-        agents[i][0] = agents[i][0] + 1
-    else:
-        agents[i][0] = agents[i][0] - 1
-    # y-coordinate
-    rn = random.random()
-    #print("rn", rn)
-    if rn < 0.5:
-        agents[i][1] = agents[i][1] + 1
-    else:
-        agents[i][1] = agents[i][1] - 1
-print(agents)
+# Apply movement constraints.
+for i in range(n_iterations):
+    if agents[i][0] < x_min:
+        agents[i][0] = x_min
+    if agents[i][1] < y_min:
+        agents[i][1] = y_min
+    if agents[i][0] > x_max:
+        agents[i][0] = x_max
+    if agents[i][1] > y_max:
+        agents[i][1] = y_max
+    
+    for i in range(n_agents):
+        # Change agents[i] coordinates randomly
+        # x-coordinate
+        rn = random.random()
+        #print("rn", rn)
+        if rn < 0.5:
+            agents[i][0] = agents[i][0] + 1
+        else:
+            agents[i][0] = agents[i][0] - 1
+        # y-coordinate
+        rn = random.random()
+        #print("rn", rn)
+        if rn < 0.5:
+            agents[i][1] = agents[i][1] + 1
+        else:
+            agents[i][1] = agents[i][1] - 1
+#print(agents)
 
 
 # Plot
