@@ -17,40 +17,33 @@ random.seed(0)
 # A variable to store the number of agents
 n_agents = 10
 
-a = af.Agent()
-print("type(a)", type(a))
+
+# Variables for constraining movement.
+# The minimum x coordinate.
+x_min = 0
+# The minimum y coordinate.
+y_min = 0
+# The maximum x coordinate.
+x_max = 99
+# The maximum y coordinate.
+y_max = 99
+
+# testing the creation of an Agent
+#a = af.Agent()
+#print("type(a)", type(a))
 
 # Initialise agents
 agents = []
 for i in range(n_agents):
-    agents.append(af.Agent())
+    agents.append(af.Agent(i))
     print(agents[i])
 print(agents)
 
 # Move agents
 for i in range(n_agents):
-    agents[i].move()
-print(agents)
-
-'''
-            for i in range(n_agents):
-            # Change agents[i] coordinates randomly
-            # x-coordinate
-            rn = random.random()
-            #print("rn", rn)
-            if rn < 0.5:
-                self.x = self.x + 1
-            else:
-                self.x = self.x - 1
-            # y-coordinate
-            rn = random.random()
-            #print("rn", rn)
-            if rn < 0.5:
-                self.y = self.y + 1
-            else:
-                self.y = self.y - 1
-
-'''
+    # Change agents[i] coordinates randomly
+    agents[i].move(x_min, y_min, x_max, y_max)
+print(agents)    
 
 # Use get_distance
 # Calculate the Euclidean distance between (x0, y0) and (x1, y1)
@@ -96,3 +89,4 @@ plt.scatter(ly.x, ly.y, color='yellow')
 sy = min(agents, key=operator.attrgetter('y'))
 plt.scatter(sy.x, sy.y, color='green')
 plt.show()
+
