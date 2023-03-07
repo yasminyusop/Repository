@@ -22,6 +22,8 @@ print(data)
 
 '''
 
+#define function for read_data
+
 def read_data(filename):
     #open and sort data into lines and columns
     data = []
@@ -32,8 +34,8 @@ def read_data(filename):
             row.append(value)
             #print(value)
         data.append(row)
-    f.close()
-    
+        
+ 
     n_rows = len(data)
     
     # Test each row has the same length
@@ -45,11 +47,14 @@ def read_data(filename):
         
     return data, n_rows, n_cols #packs the results to the function definition
     
+    f.close()
     
    
-
+    
+'''
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'
 data, n_rows, n_cols = read_data(filename) #unpacks operations done in function definition, hence whatever print will appear
 #print(data)
 print(n_rows)
 print(n_cols)
+'''

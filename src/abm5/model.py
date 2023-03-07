@@ -13,9 +13,7 @@ import my_modules.agentframework as af
 import my_modules.io as io
 
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'
-
-environment = io.read_data(filename)
-
+environment, n_rows, n_cols = io.read_data(filename)
 
 # Set the pseudo-random seed for reproducibility
 random.seed(0)
@@ -30,9 +28,9 @@ x_min = 0
 # The minimum y coordinate.
 y_min = 0
 # The maximum x coordinate.
-x_max = 99
+x_max = n_cols-1
 # The maximum y coordinate.
-y_max = 99
+y_max = n_rows-1
 
 # testing the creation of an Agent
 #a = af.Agent()
@@ -41,7 +39,7 @@ y_max = 99
 # Initialise agents
 agents = []
 for i in range(n_agents):
-    agents.append(af.Agent(i))
+    agents.append(af.Agent(i, environment, n_rows, n_cols))
     print(agents[i])
 print(agents)
 
@@ -50,6 +48,11 @@ for i in range(n_agents):
     # Change agents[i] coordinates randomly
     agents[i].move(x_min, y_min, x_max, y_max)
 print(agents)    
+
+# Eat agents
+for i in range(n_agents):
+    agents[i].eat()
+print(agents)
 
 # Use get_distance
 # Calculate the Euclidean distance between (x0, y0) and (x1, y1)
@@ -80,6 +83,9 @@ print("max_distance", get_max_distance(agents))
 #print("Time taken to calculate maximum distance", end - start, "seconds")    
 
 # Plot
+
+plt.imshow(environment)
+
 for i in range(n_agents):
     plt.scatter(agents[i].x, agents[i].y, color='black')
 # Plot the coordinate with the largest x red
@@ -94,5 +100,7 @@ plt.scatter(ly.x, ly.y, color='yellow')
 # Plot the coordinate with the smallest y green
 sy = min(agents, key=operator.attrgetter('y'))
 plt.scatter(sy.x, sy.y, color='green')
+plt.ylim(y_max / 3, y_max * 2 / 3)
+plt.xlim(x_max / 3, x_max * 2 / 3)
 plt.show()
 
