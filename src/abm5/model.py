@@ -21,6 +21,7 @@ random.seed(0)
 # A variable to store the number of agents
 n_agents = 10
 
+n_iterations = 100
 
 # Variables for constraining movement.
 # The minimum x coordinate.
@@ -43,16 +44,34 @@ for i in range(n_agents):
     print(agents[i])
 print(agents)
 
-# Move agents
-for i in range(n_agents):
-    # Change agents[i] coordinates randomly
-    agents[i].move(x_min, y_min, x_max, y_max)
-print(agents)    
+# Simulation loop
+for ite in range(n_iterations):
+    # Move agents
+    for i in range(n_agents):
+        # Change agents[i] coordinates randomly
+        agents[i].move(x_min, y_min, x_max, y_max)
+    print(agents)    
 
-# Eat agents
-for i in range(n_agents):
-    agents[i].eat()
-print(agents)
+  
+    # Eat agents
+    print("Each agent eats")
+    for i in range(n_agents):
+        print("Before eating", agents[i])
+        agents[i].eat()
+        print("After eating", agents[i])
+    print(agents)
+    
+print("store", agents.store)
+    
+# Apply movement constraints
+if agents[i].x < x_min:
+    agents[i].x = x_min
+if agents[i].y < y_min:
+    agents[i].y = y_min
+if agents[i].x > x_max:
+    agents[i].x = x_max
+if agents[i].y > y_max:
+    agents[i].y = y_max
 
 # Use get_distance
 # Calculate the Euclidean distance between (x0, y0) and (x1, y1)
@@ -60,7 +79,7 @@ print(agents)
 
 def get_distance(x0,y0,x1,y1):
     return math.sqrt((x0 - x1)**2 + (y0 - y1)**2)
-print("distance", get_distance(0,0,3,4))
+#print("distance", get_distance(0,0,3,4))
 
 ''' get_distance function was defined with x0,y0,y1,y1
 and distance equation was simplified into one line '''

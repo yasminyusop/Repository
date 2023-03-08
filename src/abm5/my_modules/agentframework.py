@@ -98,8 +98,11 @@ class Agent:
         #self.y = random.randint(0, 99)
         
     def __str__(self):
-        return self.__class__.__name__ + "(x=" + str(self.x) \
-            + ", y=" + str(self.y) + ")"   
+        return self.__class__.__name__ \
+            + "(i=" + str(self.i) \
+            + ", x=" + str(self.x) \
+            + ", y=" + str(self.y) \
+            + ", store=" + str(self.store) + ")"   
             
     def __repr__(self):
         return str(self)
@@ -108,14 +111,16 @@ class Agent:
     def move(self, x_min, y_min, x_max, y_max):
             # Change agents[i] coordinates randomly
             # replace "agents[i]" with "self"
-            # x-coordinate
+            # this code block makes the agents move diagonally
+            
+        # x-coordinate
             rn = random.random()
             #print("rn", rn)
             if rn < 0.5:
                 self.x = self.x + 1
             else:
                 self.x = self.x - 1
-            # y-coordinate
+        # y-coordinate
             rn = random.random()
             #print("rn", rn)
             if rn < 0.5:
@@ -124,6 +129,12 @@ class Agent:
                 self.y = self.y - 1
                 
     def eat(self):
+        print ("Value of environment at locations before eating", self.environment[self.y][self.x])  
         if self.environment[self.y][self.x] >= 10:
             self.environment[self.y][self.x] -= 10
-            self.store += 10                
+            self.store += 10
+            
+            
+            
+            
+        print ("Value of environment at locations after eating", self.environment[self.y][self.x])                
