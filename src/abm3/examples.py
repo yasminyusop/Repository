@@ -24,3 +24,22 @@ for i in range(len(agents)):
             #print("distance between", a, b, distance)
             max_distance = min(max_distance, distance)
 print("min_distance", max_distance)
+
+    # Loop through and calculate distances
+    max_distance = 0
+    min_distance = get_distance(a[0], a[1], b[0], b[1])
+    for i in range(len(agents)):
+        a = agents[i]
+        for j in range(i + 1, len(agents)):
+            #print("i", i, "j", j)
+            b = agents[j]
+            distance = get_distance(a[0], a[1], b[0], b[1])
+            #print("distance between", a, b, distance)
+            max_distance = max(max_distance, distance)
+            min_distance = min(min_distance, distance)
+            print("max_distance", max_distance /
+                + "min_distance", min_distance)
+            
+    return max_distance, min_distance
+        
+        
