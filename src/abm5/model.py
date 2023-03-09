@@ -39,6 +39,8 @@ y_max = n_rows-1
 
 # Initialise agents
 agents = []
+values = [] #to store environment values
+
 for i in range(n_agents):
     agents.append(af.Agent(i, environment, n_rows, n_cols))
     print(agents[i])
@@ -50,18 +52,23 @@ for ite in range(n_iterations):
     for i in range(n_agents):
         # Change agents[i] coordinates randomly
         agents[i].move(x_min, y_min, x_max, y_max)
-    print(agents)    
+        print(agents)
+    
 
-  
+       
+          
     # Eat agents
     print("Each agent eats")
     for i in range(n_agents):
         print("Before eating", agents[i])
+       # values.append(af.Agent.environment(agents[i].x,agents[i].y)) #append environment list failed. how to get individual values?
         agents[i].eat()
         print("After eating", agents[i])
     print(agents)
-    
-print("store", agents.store)
+   # print("sum of values", sum(values)) not working
+
+#print("store", af.Agent.store)    
+
     
 # Apply movement constraints
 if agents[i].x < x_min:
