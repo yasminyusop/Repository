@@ -129,12 +129,12 @@ class Agent:
                 self.y = self.y - 1
                 
     def eat(self):
-        print ("Value of environment at locations before eating", self.environment[self.y][self.x])  
+       # print ("Value of environment at locations before eating", self.environment[self.y][self.x])  
         if self.environment[self.y][self.x] >= 10:
             self.environment[self.y][self.x] -= 10
             self.store += 10
           
-        print ("Value of environment at locations after eating", self.environment[self.y][self.x])    
+       # print ("Value of environment at locations after eating", self.environment[self.y][self.x])    
 
 
                     
