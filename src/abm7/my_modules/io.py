@@ -34,8 +34,19 @@ def read_data(filename):
     return data, n_rows, n_cols #packs the results to the function definition
     
     f.close()
+ 
     
-   
+def write_data(filename,data):
+    # Open a file for writing
+    f = open(filename, 'w', newline='')
+    # Write a to the file
+    writer = csv.writer(f, delimiter=' ')
+    for row in data:
+        writer.writerow(row) # List of values.
+    # Close the file
+    f.close() 
+
+
     
 '''
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'

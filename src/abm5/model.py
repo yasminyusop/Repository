@@ -11,9 +11,35 @@ from matplotlib import pyplot as plt
 import operator
 import my_modules.agentframework as af
 import my_modules.io as io
+import csv
 
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'
 environment, n_rows, n_cols = io.read_data(filename)
+
+# Function to write data
+def write_data(filename,data):
+    # Open a file for writing
+    f = open(filename, 'w', newline='')
+    # Write a to the file
+    writer = csv.writer(f, delimiter=' ')
+    for row in data:
+        writer.writerow(row) # List of values.
+    # Close the file
+    f.close()
+
+# Function that adds up all the store values in all agents
+def sum_agent_stores():
+    r = 0
+    for a in agents:
+        r = r + a.store
+    return r
+
+# Function that adds up all the values in the environment
+def sum_environment():
+    r = 0
+    for row in environment:
+        r = r + sum(row)
+    return r
 
 # Set the pseudo-random seed for reproducibility
 random.seed(0)
@@ -39,7 +65,6 @@ y_max = n_rows-1
 
 # Initialise agents
 agents = []
-values = [] #to store environment values
 
 for i in range(n_agents):
     agents.append(af.Agent(i, environment, n_rows, n_cols))
@@ -53,21 +78,28 @@ for ite in range(n_iterations):
         # Change agents[i] coordinates randomly
         agents[i].move(x_min, y_min, x_max, y_max)
        # print(agents)
-    
-
-       
           
     # Eat agents
-    #print("Each agent eats")
+    print("Each agent eats")
     for i in range(n_agents):
         #print("Before eating", agents[i])
-       # values.append(af.Agent.environment(agents[i].x,agents[i].y)) #append environment list failed. how to get individual values?
         agents[i].eat()
-       # print("After eating", agents[i])
+        #print("After eating", agents[i])
     print(agents)
-   # print("sum of values", sum(values)) not working
+   
 
-#print("store", af.Agent.store)    
+
+
+# Print out sums of store and environment
+print("sum_store", sum_agent_stores())
+print("sum_environment", sum_environment())   
+
+# Print the total amount of resource
+total_resource = sum_agent_stores() + sum_environment()
+print("total_resource", total_resource)
+
+# write out values of the environment   
+write_data('../../data/output/out7.txt', environment)
 
     
 # Apply movement constraints

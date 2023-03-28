@@ -15,13 +15,13 @@ import imageio
 import os
 import matplotlib.animation as anim
 
+
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'
 environment, n_rows, n_cols = io.read_data(filename)
 
-# Set the pseudo-random seed for reproducibility
-random.seed(0)
 
-# Function definitions
+# Function definitions:
+    
 # Function to calculate max distance
 def get_max_distance(agents):
     max_distance = 0
@@ -74,19 +74,6 @@ def plot():
     plt.show
     return fig
 
-
-# Create directory to write images to.
-try:
-    os.makedirs('../../data/output/images/')
-except FileExistsError:
-    print("path exists")
-
-# For storing images
-global ite
-ite = 1
-images = []
-
-
 # Change the model loop code block into a function
 def update(frames):
     # Model loop
@@ -111,25 +98,31 @@ def update(frames):
         agents[i].store_shares = 0
     #print(agents)
     # Print the maximum distance between all the agents
-    print("Maximum distance between all the agents", get_max_distance())
+    print("Maximum distance between all the agents", get_max_distance(agents))
     # Print the total amount of resource
     sum_as = sum_agent_stores()
     print("sum_agent_stores", sum_as)
     sum_e = sum_environment()
     print("sum_environment", sum_e)
     print("total resource", (sum_as + sum_e))
-
+    
     # Stopping condition
     # Random
     if random.random() < 0.1:
-        #if sum_as / n_agents > 80:
         carry_on = False
         print("stopping condition")
-
+      
     # Plot
-    plot()
+    plot()    
 
-
+    '''
+    # Alternate stopping condition
+    # Average agent store is greater than 80
+    if sum_as / n_agents > 80:    
+        carry_on = False
+        print("stopping condition")
+    '''
+        
 def gen_function():
     global ite
     global carry_on #Not actually needed as we're not assigning, but clearer
@@ -143,6 +136,22 @@ def gen_function():
         io.write_data('../../data/output/out7.txt', environment)
         imageio.mimsave('../../data/output/out7.gif', images, fps=3)
         data_written = True
+
+
+# Set the pseudo-random seed for reproducibility
+random.seed(0)
+
+# Create directory to write images to.
+try:
+    os.makedirs('../../data/output/images/')
+except FileExistsError:
+    print("path exists")
+
+# For storing images
+global ite
+ite = 1
+images = []
+
 
 # Initialise variables
 n_agents = 10
@@ -183,4 +192,4 @@ animation = anim.FuncAnimation(fig, update, init_func=plot, frames=gen_function,
     
 
 
-#imageio.mimsave('../../data/output/out.gif', images, fps=3)
+
