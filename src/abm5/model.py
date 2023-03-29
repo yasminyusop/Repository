@@ -4,18 +4,30 @@ Created on Mon Feb 20 11:44:45 2023
 
 @author: gy22fybm
 """
-
-import random
-import math
-from matplotlib import pyplot as plt
-import operator
+# Import modules
 import my_modules.agentframework as af
 import my_modules.io as io
+
+# For model
+import random
+import math
+
+# For plot
+from matplotlib import pyplot as plt
+import operator
+
+# For input data
 import csv
 
+
+
+# File location
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'
 environment, n_rows, n_cols = io.read_data(filename)
 
+
+
+# Functions :
 # Function to write data
 def write_data(filename,data):
     # Open a file for writing
@@ -41,27 +53,52 @@ def sum_environment():
         r = r + sum(row)
     return r
 
+# Use get_distance
+# Calculate the Euclidean distance between (x0, y0) and (x1, y1)
+# Set x0 and y0 to equal 0, x1 to equal 3, and y1 to equal 4
+
+def get_distance(x0,y0,x1,y1):
+    return math.sqrt((x0 - x1)**2 + (y0 - y1)**2)
+#print("distance", get_distance(0,0,3,4))
+
+def get_max_distance(agents):
+    max_distance = 0
+    for i in range(len(agents)):
+        a = agents[i]
+        for j in range(i+1, len(agents)):
+            b = agents[j]
+            distance = get_distance(a.x, a.y, b.x, b.y)
+            max_distance = max(max_distance, distance)
+    return max_distance
+    print("max_distance", get_max_distance(agents))
+
+
+
+# Setting up :
 # Set the pseudo-random seed for reproducibility
 random.seed(0)
 
 # A variable to store the number of agents
 n_agents = 10
 
+# A variable to set number of iterations
 n_iterations = 100
 
-# Variables for constraining movement.
-# The minimum x coordinate.
+# Variables for constraining movement
+# The minimum x coordinate
 x_min = 0
-# The minimum y coordinate.
+# The minimum y coordinate
 y_min = 0
-# The maximum x coordinate.
+# The maximum x coordinate
 x_max = n_cols-1
-# The maximum y coordinate.
+# The maximum y coordinate
 y_max = n_rows-1
 
-# testing the creation of an Agent
+# Testing the creation of an Agent
 #a = af.Agent()
 #print("type(a)", type(a))
+
+
 
 # Initialise agents
 agents = []
@@ -88,8 +125,7 @@ for ite in range(n_iterations):
     print(agents)
    
 
-
-
+# Additional tasks: 
 # Print out sums of store and environment
 print("sum_store", sum_agent_stores())
 print("sum_environment", sum_environment())   
@@ -98,11 +134,12 @@ print("sum_environment", sum_environment())
 total_resource = sum_agent_stores() + sum_environment()
 print("total_resource", total_resource)
 
-# write out values of the environment   
+# Write out values of the environment   
 write_data('../../data/output/out7.txt', environment)
 
-    
-# Apply movement constraints
+
+
+# Apply movement constraints :
 if agents[i].x < x_min:
     agents[i].x = x_min
 if agents[i].y < y_min:
@@ -111,37 +148,10 @@ if agents[i].x > x_max:
     agents[i].x = x_max
 if agents[i].y > y_max:
     agents[i].y = y_max
+    
+    
 
-# Use get_distance
-# Calculate the Euclidean distance between (x0, y0) and (x1, y1)
-# Set x0 and y0 to equal 0, x1 to equal 3, and y1 to equal 4
-
-def get_distance(x0,y0,x1,y1):
-    return math.sqrt((x0 - x1)**2 + (y0 - y1)**2)
-#print("distance", get_distance(0,0,3,4))
-
-''' get_distance function was defined with x0,y0,y1,y1
-and distance equation was simplified into one line '''
-
-#start = time.perf_counter()
-
-def get_max_distance(agents):
-    max_distance = 0
-    for i in range(len(agents)):
-        a = agents[i]
-        for j in range(i+1, len(agents)):
-            b = agents[j]
-            distance = get_distance(a.x, a.y, b.x, b.y)
-            max_distance = max(max_distance, distance)
-    return max_distance
-
-print("max_distance", get_max_distance(agents))
-
-#end = time.perf_counter()
-#print("Time taken to calculate maximum distance", end - start, "seconds")    
-
-# Plot
-
+# Plot :  
 plt.imshow(environment)
 
 for i in range(n_agents):

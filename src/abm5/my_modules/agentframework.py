@@ -7,13 +7,11 @@ Created on Mon Feb 27 10:29:35 2023
 
 import random
 
-#class Agent():
-   # pass
-
-
     
 '''
-#Initialiase in the corner  
+Different ways to initialise agents: 
+
+# Initialiase in the corner  
     def __init__(self, i):
         
         The constructor method.
@@ -33,10 +31,7 @@ import random
         self.y = random.randint(0, 99)
         pass
    
-'''
-
-'''   
-#initialise in the middle
+# Initialise in the middle
     def __init__(self, i, n_rows, n_cols):
        
         
@@ -62,7 +57,9 @@ import random
         self.y = random.randint(0, tnr - 1) + tnr
  '''
  
- #agent-environment interaction
+ 
+ 
+# Agent-environment interaction
 class Agent: 
     def __init__(self, i, environment, n_rows, n_cols):
    
@@ -92,17 +89,14 @@ class Agent:
         self.store = 0
 
 
-
-    #def __init__(self): <-initial codes used
-        #self.x = random.randint(0, 99)
-        #self.y = random.randint(0, 99)
-        
+       
     def __str__(self):
         return self.__class__.__name__ \
             + "(i=" + str(self.i) \
             + ", x=" + str(self.x) \
             + ", y=" + str(self.y) \
             + ", store=" + str(self.store) + ")"   
+          
             
     def __repr__(self):
         return str(self)
@@ -127,13 +121,24 @@ class Agent:
                 self.y = self.y + 1
             else:
                 self.y = self.y - 1
+           
                 
     def eat(self):
        # print ("Value of environment at locations before eating", self.environment[self.y][self.x])  
         if self.environment[self.y][self.x] >= 10:
             self.environment[self.y][self.x] -= 10
-            self.store += 10
-          
+            self.store += 10    
+        #else: 
+            #self.environment[self.y][self.x] -= 10
+            #self.store += 10 
+        '''
+        Additional task tested and resulted in same value of total resource and 
+        sum_store. This means that all value of the environment where agents
+        are located have a value of >=10
+        
+        '''
+        
+         
        # print ("Value of environment at locations after eating", self.environment[self.y][self.x])    
 
 

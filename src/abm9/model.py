@@ -27,6 +27,10 @@ import os
 # For GUI
 import tkinter as tk
 
+# Parsing HTML file
+import requests
+import bs4
+
 
 # Location of inputs
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'
@@ -199,11 +203,21 @@ x_max = n_cols-1
 y_max = n_rows-1
 
 # Initialise agents
+url = 'https://agdturner.github.io/resources/abm9/data.html'
+r = requests.get(url, verify=False)
+content = r.text
+soup = bs4.BeautifulSoup(content, 'html.parser')
+td_ys = soup.find_all(attrs={"class" : "y"})
+td_xs = soup.find_all(attrs={"class" : "x"})
+print(td_ys)
+print(td_xs)
 agents = []
-
 for i in range(n_agents):
-    agents.append (af.Agent(agents, i, environment, n_rows, n_cols))
-    print(agents[i])
+    # Create an agent
+    y = int(td_ys[i].text) + 99
+    x = int(td_xs[i].text) + 99
+    agents.append(af.Agent(agents, i, environment, n_rows, n_cols, x, y))
+    print(agents[i].agents[i])
 
 # Animate
 # Initialise fig and carry_on

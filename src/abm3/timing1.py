@@ -66,7 +66,7 @@ def get_max_distance():
             #print("max_distance", max_distance)
     return max_distance
 
-print("i", i, "j", j)
+    print("i", i, "j", j)
 
 # A list to store times
 run_times = []

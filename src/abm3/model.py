@@ -7,7 +7,6 @@ Created on Mon Feb 20 11:44:45 2023
 
 import random
 import math
-import matplotlib
 from matplotlib import pyplot as plt
 import operator
 import time
@@ -34,6 +33,8 @@ agents = []
 for i in range(n_agents):
     agents.append([random.randint(0, 99), random.randint(0, 99)])
 #print(agents)
+
+
 
 # Move agents
 # Apply movement constraints.
@@ -66,6 +67,7 @@ for i in range(n_iterations):
 #print(agents)
 
 
+
 # Plot
 for i in range(n_agents):
     plt.scatter(agents[i][0], agents[i][1], color='black')
@@ -83,13 +85,11 @@ sy = min(agents, key=operator.itemgetter(1))
 plt.scatter(sy[0], sy[1], color='green')
 plt.show()
 
-"""
-start of abm3
-"""
+
+
 # Use get_distance
 # Calculate the Euclidean distance between (x0, y0) and (x1, y1)
 # Set x0 and y0 to equal 0, x1 to equal 3, and y1 to equal 4
-
 def get_distance(x0,y0,x1,y1):
     return math.sqrt((x0 - x1)**2 + (y0 - y1)**2)
 print("distance", get_distance(0,0,3,4))
@@ -97,7 +97,7 @@ print("distance", get_distance(0,0,3,4))
 ''' get_distance function was defined with x0,y0,y1,y1
 and distance equation was simplified into one line '''
 
-start = time.perf_counter()
+start = time.perf_counter() # start timer
 
 def get_max_distance(agents):
     max_distance = 0
@@ -111,5 +111,5 @@ def get_max_distance(agents):
 
 print("max_distance", get_max_distance(agents))
 
-end = time.perf_counter()
+end = time.perf_counter() # end timer
 print("Time taken to calculate maximum distance", end - start, "seconds")    

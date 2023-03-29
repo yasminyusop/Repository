@@ -43,7 +43,7 @@ class Agent:
     def __repr__(self):
         return str(self)
     
-   
+   # function to move agents
     def move(self, x_min, y_min, x_max, y_max):
             # Change agents[i] coordinates randomly
             # replace "agents[i]" with "self"
