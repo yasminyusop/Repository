@@ -5,23 +5,31 @@ Created on Mon Feb 20 11:44:45 2023
 @author: gy22fybm
 """
 
-import random
-from matplotlib import pyplot as plt
-import operator
+# Import modules
 import my_modules.agentframework as af
 import my_modules.io as io
 import my_modules.geometry as gy
-import imageio
-import os
+
+# For simulation
+import random
+import operator
+
+# For plotting
+from matplotlib import pyplot as plt
 import matplotlib.animation as anim
 
+# Output images
+import imageio
+import os
 
+
+# Location of inputs
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'
 environment, n_rows, n_cols = io.read_data(filename)
 
 
+
 # Function definitions:
-    
 # Function to calculate max distance
 def get_max_distance(agents):
     max_distance = 0
@@ -136,6 +144,7 @@ def gen_function():
         io.write_data('../../data/output/out7.txt', environment)
         imageio.mimsave('../../data/output/out7.gif', images, fps=3)
         data_written = True
+
 
 
 # Set the pseudo-random seed for reproducibility

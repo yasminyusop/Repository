@@ -7,7 +7,6 @@ Created on Mon Feb 20 11:44:45 2023
 
 import random
 import math
-import matplotlib
 from matplotlib import pyplot as plt
 import operator
 import time
@@ -72,20 +71,14 @@ def process(n_agents):
    
 #print("max_distance", get_max_distance(agents))
 print(process(500))
-    
-
        
 
 
-    
 
-
-
-
-'''    
 # Plot
 for i in range(n_agents):
     plt.scatter(agents[i][0], agents[i][1], color='black')
+
 # Plot the coordinate with the largest x red
 lx = max(agents, key=operator.itemgetter(0))
 plt.scatter(lx[0], lx[1], color='red')
@@ -101,9 +94,4 @@ plt.scatter(sy[0], sy[1], color='green')
 plt.show()
 
 
-# Use get_distance
-# Calculate the Euclidean distance between (x0, y0) and (x1, y1)
-# Set x0 and y0 to equal 0, x1 to equal 3, and y1 to equal 4
-
    
-'''

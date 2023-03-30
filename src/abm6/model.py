@@ -5,51 +5,29 @@ Created on Mon Feb 20 11:44:45 2023
 @author: gy22fybm
 """
 
-import random
-from matplotlib import pyplot as plt
-import operator
+# Import modules
 import my_modules.agentframework as af
 import my_modules.io as io
 import my_modules.geometry as gy
+
+# For simulation
+import random
+import operator
+
+# For plotting
+from matplotlib import pyplot as plt
+
+# Output images
 import imageio
 import os
 
+# Location of inputs
 filename = '//ds.leeds.ac.uk/student/student13/gy22fybm/GEOG5990/Repository/data/input/in.txt'
 environment, n_rows, n_cols = io.read_data(filename)
 
-# Set the pseudo-random seed for reproducibility
-random.seed(0)
-
-# Initialise variables
-n_agents = 10
-n_iterations = 10
-neighbourhood = 20
-
-# Variables for constraining movement.
-# The minimum x coordinate.
-x_min = 0
-# The minimum y coordinate.
-y_min = 0
-# The maximum x coordinate.
-x_max = n_cols-1
-# The maximum y coordinate.
-y_max = n_rows-1
-
-# testing the creation of an Agent
-#a = af.Agent()
-#print("type(a)", type(a))
-
-# Initialise agents
-agents = []
-
-for i in range(n_agents):
-    agents.append (af.Agent(agents, i, environment, n_rows, n_cols))
-    print(agents[i])
-
-# Test if code works by printing one agent from another
-print(agents[0].agents[1])
 
 
+# Function definitions:
 # Function to calculate max distance
 def get_max_distance(agents):
     max_distance = 0
@@ -76,6 +54,39 @@ def sum_environment():
     return r
 
 
+
+# Set the pseudo-random seed for reproducibility
+random.seed(0)
+
+# Initialise variables
+n_agents = 10
+n_iterations = 10
+neighbourhood = 20
+
+# Variables for constraining movement.
+# The minimum x coordinate.
+x_min = 0
+# The minimum y coordinate.
+y_min = 0
+# The maximum x coordinate.
+x_max = n_cols-1
+# The maximum y coordinate.
+y_max = n_rows-1
+
+
+
+# Initialise agents
+agents = []
+
+for i in range(n_agents):
+    agents.append (af.Agent(agents, i, environment, n_rows, n_cols))
+    print(agents[i])
+
+# Test if code works by printing one agent from another
+print(agents[0].agents[1])
+
+
+
 # Create directory to write images to.
 try:
     os.makedirs('../../data/output/images/')
@@ -86,6 +97,7 @@ except FileExistsError:
 global ite
 ite = 1
 images = []
+
 
 
 # Main simulation loop
@@ -115,6 +127,8 @@ for ite in range(1, n_iterations + 1):
     sum_e = sum_environment()
     print("sum_environment", sum_e)
     print("total resource", (sum_as + sum_e))    
+ 
+    
  
     # Plot
     plt.imshow(environment)
