@@ -184,6 +184,7 @@ ite = 1
 images = []
 
 
+# Model
 # Set the pseudo-random seed for reproducibility
 random.seed(0)
 
@@ -202,6 +203,7 @@ x_max = n_cols-1
 # The maximum y coordinate.
 y_max = n_rows-1
 
+
 # Initialise agents
 url = 'https://agdturner.github.io/resources/abm9/data.html'
 r = requests.get(url, verify=False)
@@ -219,12 +221,16 @@ for i in range(n_agents):
     agents.append(af.Agent(agents, i, environment, n_rows, n_cols, x, y))
     print(agents[i].agents[i])
 
+
+
 # Animate
 # Initialise fig and carry_on
 fig = plt.figure(figsize=(7, 7))
 ax = fig.add_axes([0, 0, 1, 1])
 carry_on = True
 data_written = False
+
+
 
 # GUI
 root = tk.Tk()

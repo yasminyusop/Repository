@@ -205,12 +205,16 @@ for i in range(n_agents):
     agents.append (af.Agent(agents, i, environment, n_rows, n_cols))
     print(agents[i])
 
+
+
 # Animate
 # Initialise fig and carry_on
 fig = plt.figure(figsize=(7, 7))
 ax = fig.add_axes([0, 0, 1, 1])
 carry_on = True
 data_written = False
+
+
 
 # GUI
 root = tk.Tk()

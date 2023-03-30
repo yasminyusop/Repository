@@ -9,6 +9,7 @@ import random
 # Set the pseudo-random seed for reproducibility
 random.seed(0)
 
+
 # Variables x0 and y0 :
 # Initialise variable x0
 x0 = 0
