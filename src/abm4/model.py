@@ -75,6 +75,8 @@ print("max_distance", get_max_distance(agents))
 #end = time.perf_counter()
 #print("Time taken to calculate maximum distance", end - start, "seconds")    
 
+
+
 # Plot
 for i in range(n_agents):
     plt.scatter(agents[i].x, agents[i].y, color='black')

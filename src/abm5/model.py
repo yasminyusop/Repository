@@ -125,6 +125,7 @@ for ite in range(n_iterations):
     print(agents)
    
 
+
 # Additional tasks: 
 # Print out sums of store and environment
 print("sum_store", sum_agent_stores())
